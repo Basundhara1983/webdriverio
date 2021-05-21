@@ -1,0 +1,27 @@
+Webdriver IO setup 
+
+mkdir tswebdriverio && cd tswebdriverio
+npm init -y
+npm i --save-dev @wdio/cli
+./node_modules/.bin/wdio config -y
+
+typescript setup 
+
+npm i --save-dev ts-node tsconfig-paths
+npm install typescript --save -dev
+
+create tsconfig.json and jsconfig.json files
+change wdio.conf.js options -
+specs: [
+        './test/specs/**/*.ts'
+    ],
+  mochaOpts: {
+        ui: 'bdd',
+        timeout: 60000,
+        require: [
+            'tsconfig-paths/register'
+        ]
+    },
+         before: function (capabilities, specs) {
+        require('ts-node').register({ files: true })
+     },   
